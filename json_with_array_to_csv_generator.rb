@@ -48,8 +48,8 @@ end
 
 # read JSON 
 json_info = File.open("#{name_of_json_file_which_is_sibling_of_this_file}.json").read
-# transform to Ruby object for parsing 
 
+# transform to Ruby object for parsing 
 begin
   json_info_now_ruby_object = JSON.parse(json_info)
 rescue 
@@ -57,57 +57,45 @@ rescue
   exit
 end
 
-# collect all the headers so they may be initialized
-headers_collection = []
+json_info_now_ruby_object.each do |k, array_entry|
+  headers_collection = []
+  sorted_collection = {}
 
-json_info_now_ruby_object.each do |k, v|
-  json_info_now_ruby_object[k].each do |entry, i|
+  array_entry.each do |entry|
     entry.keys.each do |key|
       headers_collection.push(key) unless headers_collection.include?(key)
     end
   end
-end
-
-# ensure all the entries have the default values
-json_info_now_ruby_object.each do |k, v|
-  json_info_now_ruby_object[k].each do |entry, i|
+  array_entry.each do |entry|
     headers_collection.each do |header|
       # if the object doesn't have the header, default a value to ''
       entry[header] ||= ''
     end 
   end
-end
 
+  # make sure hashes are sorted so that their values line up for later 
+  # formulate new entry objects because mutating hashes is weird and oddly unreliable
+  sorted_collection[k] = []
 
-# make sure hashes are sorted so that their values line up for later 
-# formulate a new object because mutating hashes is weird and oddly unreliable
-sorted_collection = {}
-
-json_info_now_ruby_object.each do |key, value|
-  sorted_collection[key] = []
-  json_info_now_ruby_object[key].each_with_index do |entry, i|
-    _entry = json_info_now_ruby_object[key][i]
-    sorted_entry = _entry.sort_by { |k, v| k }.to_h
-
-    sorted_collection[key].push(sorted_entry)
+  array_entry.each_with_index do |entry, i|
+    sorted_entry = array_entry[i].sort_by { |ky, _| ky }.to_h
+  
+    sorted_collection[k].push(sorted_entry)
   end
-end
 
-# creates new CSVs for each top level key JIC they exist.
-count = 0
-
-sorted_collection.each do |key, collection|
-  sorted_collection[key].each_with_index do |entry, i|
-    num = count == 0 ? '' : count
-    
-    csv = CSV.open("#{name_of_csv_file_you_want}#{num}.csv", "wb") do |csv|
-      csv << sorted_collection[key][0].keys # we only need 1
-      collection.each do |entry|
-        csv << entry.values
+  # creates new CSVs for each top level key JIC they exist.
+  sorted_collection.each do |key, collection|
+    sorted_collection[key].each_with_index do |entry, i|
+      
+      csv = CSV.open("#{name_of_csv_file_you_want}-#{key}.csv", "wb") do |csv|
+        # we only need 1 example of the headers since all entries now have them.
+        csv << sorted_collection[key][0].keys
+        collection.each do |entry|
+          csv << entry.values
+        end
       end
     end
   end
-  ++count
 end
 
 puts Dir.pwd + '/' + name_of_csv_file_you_want + '.csv' + ' has been generated.'

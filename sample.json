@@ -12,5 +12,19 @@
       "gun": true ,
       "name": "Winn"
     }
+  ],
+  "throughput": [
+    {
+      "name": "Kara",
+      "superhero": true
+    },
+    {
+      "name": "Alex",
+      "gun": true 
+    },
+    {
+      "gun": true ,
+      "name": "Bob"
+    }
   ]
 }
