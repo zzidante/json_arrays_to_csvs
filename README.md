@@ -6,7 +6,7 @@ Used/tested with ruby version `2.4.6p35`. Should work with any Ruby `2.x.x` vers
 # How to use
 1. Place script in same folder as files you wish to convert (do not need JSON sample).
 2. open Terminal of choice in that folder.
-3. run `ruby json_with_array_to_csv_generator.rb --json sample --csv my_csv_file` where `sample` is the name of the JSON file you wish to convert and `my_csv_file` is the name you wish to use for the CSVs generated. Multiple CSVs will have an incrementing id at the end.
+3. run `ruby json_with_array_to_csv_generator.rb --json sample --csv my_csv_file` where `sample` is the name of the JSON file you wish to convert and `my_csv_file` is the name you wish to use for the CSV generated.
 4. You may also use `-j` and `-c` in place of `--json` and `--csv`. Access help screen anytime using `-h` or `--help`.
 
 # Example
