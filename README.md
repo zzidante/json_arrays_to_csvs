@@ -18,16 +18,12 @@ This takes a JSON object as follows, let's say in a file called `baking.json`.
   "syrup": [
     { "type": "maple", "made_in": "canada" }, 
     { "type": "simple" }
-  ],
-  "pancake" : [
-    { "size": 20, "type": "sourdough" },
-    { "size": 10, "type": "wheat", "contains_allergens": true }
   ]
 }
 ```
-And converts each top level key's array into a unique csv file. So we run `ruby json_with_array_to_csv_generator.rb --json baking --csv baking_collection` 
+And converts the first key's array into a unique csv file. So we run `ruby json_with_array_to_csv_generator.rb --json baking --csv baking_collection` 
 
-Which results in the following CSV files.
+Which results in the following CSV file.
 
 ### `baking_collection.csv`
 ```
@@ -35,8 +31,3 @@ made_in, type
 canada, maple
 '', simple
 ```
-### `baking_collection2.csv`
-```
-contains_allergens, size, type
-'', 20, sourdough
-true, 10, wheat
