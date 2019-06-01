@@ -1,6 +1,7 @@
 # json_nested_array_to_csv
 
 A command-line script to convert a particular style of JSON object to a CSV file. (Pretty naive, built for a specific use).
+Used/tested with ruby version `2.4.6p35`. Should work with any Ruby `2.x.x` version.
 
 # How to use
 1. Place script in same folder as files you wish to convert (do not need JSON sample).
