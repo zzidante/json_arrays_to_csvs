@@ -1,0 +1,16 @@
+{
+  "output": [
+    {
+      "name": "Kara",
+      "superhero": true
+    },
+    {
+      "name": "Alex",
+      "gun": true 
+    },
+    {
+      "gun": true ,
+      "name": "Winn"
+    }
+  ]
+}
