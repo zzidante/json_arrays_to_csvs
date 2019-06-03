@@ -5,7 +5,8 @@ require 'pry'
 json_filename = nil
 csv_filename = nil
 command_line_input = ARGV || [];
-notify_and_exit = Proc.new { |text| puts text; exit; }
+notify = Proc.new { |text| puts text }
+notify_and_exit = Proc.new { |text| notify.call(text); exit; }
 
 # if its all empty, terminate
 command_line_input.empty? && notify_and_exit.call('[-j --json], [-c --csv] are valid flags. Use -h or --help for help with how to use them.')
@@ -86,7 +87,8 @@ json_info_now_ruby_object.each do |k, array_entry|
         end
       end
     end
+
+    notify.call("#{Dir.pwd}/#{csv_filename}-#{key}.csv has been generated.")
   end
 end
 
-notify_and_exit.call(Dir.pwd + '/' + csv_filename + '.csv' + ' has been generated.')
