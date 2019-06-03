@@ -1,6 +1,5 @@
 require 'csv'
 require 'json'
-require 'pry'
 
 json_filename = nil
 csv_filename = nil
