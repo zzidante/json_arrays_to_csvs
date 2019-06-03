@@ -1,5 +1,5 @@
 {
-  "output": [
+  "heroes": [
     {
       "name": "Kara",
       "superhero": true
@@ -9,22 +9,24 @@
       "gun": true 
     },
     {
-      "gun": true ,
+      "gun": false,
       "name": "Winn"
     }
   ],
-  "throughput": [
+  "villans": [
     {
-      "name": "Kara",
-      "superhero": true
+      "name": "Maxwell Lord",
+      "super": false,
+      "business": "Lord Technologies"
     },
     {
-      "name": "Alex",
-      "gun": true 
+      "name": "Livewire",
+      "super": true
     },
     {
-      "gun": true ,
-      "name": "Bob"
+      "super": true ,
+      "cursed": true ,
+      "name": "Silver Banshee"
     }
   ]
 }
