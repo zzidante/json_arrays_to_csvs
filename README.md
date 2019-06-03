@@ -19,16 +19,31 @@ This takes a JSON object as follows, let's say in a file called `baking.json`.
   "syrup": [
     { "type": "maple", "made_in": "canada" }, 
     { "type": "simple" }
+  ],
+  "fruit": [
+    { "type": "apple", "color": "red" }, 
+    { "type": "banana", "status": "ripe" }
   ]
 }
 ```
-And converts the first key's array into a unique csv file. So we run `ruby json_with_array_to_csv_generator.rb --json baking --csv baking_collection` 
+And converts top level keys arrays into unique csv files. So if we run `ruby json_with_array_to_csv_generator.rb --json baking --csv baking_collection` 
 
-Which results in the following CSV file.
+It will result in the following CSV files.
 
-### `baking_collection.csv`
+### `baking_collection-syrup.csv`
 ```
 made_in, type
 canada, maple
 '', simple
 ```
+### `baking_collection-fruit.csv`
+```
+color, status, type
+red, '', apple
+'', ripe, banana
+```
+
+## Considerations
+- This only handles Keys with Arrays as their values, but it can handle multiples of these cases - it will just spit out multiple files made unique by their key in the name.
+- It will reorder everything alphabetically so the resulting CSV values are ordered correctly and will add blank spaces to keys which had no values in those rows. This allows us to handle entries in the Array collection which do not properly align.
+- There are only a few basic error cases -> Invalid JSON, no arguments given and invalid arguments given.
